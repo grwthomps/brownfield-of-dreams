@@ -8,8 +8,12 @@ describe "As a logged in User" do
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
         :provider => 'github',
         :credentials => {
-          :token => ENV["Github_access_token"]
-        }
+          :token => ENV["Github_access_token"]},
+        :extra => {
+          :raw_info => {
+            :login => "github_username"
+            }
+          }
         })
 
       user = create(:user)
@@ -21,6 +25,7 @@ describe "As a logged in User" do
       click_on 'Connect to Github'
 
       expect(user.github_token).to eq(ENV["Github_access_token"])
+      expect(user.github_username).to eq("github_username")
     end
   end
 end
