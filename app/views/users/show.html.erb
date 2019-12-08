@@ -25,7 +25,9 @@
     <section id="Followers">
       <% user_info.all_followers.each_with_index do |follower, index| %>
       <section id="follower-<%= index %>">
-        <p><%= link_to follower.login, follower.html_url %></p>
+        <p><%= link_to follower.login, follower.html_url %>
+           <%= link_to "Add Friend", ... %>
+        </p>
       </section>
       <% end %>
     </section>
