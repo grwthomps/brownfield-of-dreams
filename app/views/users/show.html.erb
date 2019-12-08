@@ -26,7 +26,8 @@
       <% user_info.all_followers.each_with_index do |follower, index| %>
       <section id="follower-<%= index %>">
         <p><%= link_to follower.login, follower.html_url %>
-           <%= link_to "Add Friend", ... %>
+           <% friend = User.find_by(github_username: follower.login) %>
+           <%= link_to "Add Friend", "users/#{current_user.id}/friendships/#{friend.id}", method: :post %>
         </p>
       </section>
       <% end %>
