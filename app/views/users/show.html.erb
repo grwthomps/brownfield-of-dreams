@@ -8,9 +8,9 @@
     <li> <%= current_user.email%> </li>
   </ul>
 
-    <section>
-      <%= button_to 'Connect to Github', github_login_path %>
-    </section>
+  <section>
+    <%= button_to 'Connect to Github', github_login_path %>
+  </section>
 
   <% if current_user.github_token %>
     <h4>Github Repo's</h4>
@@ -21,17 +21,19 @@
       </section>
       <% end %>
     </section>
+
     <h4>Followers</h4>
     <section id="Followers">
       <% user_info.all_followers.each_with_index do |follower, index| %>
       <section id="follower-<%= index %>">
-        <p><%= link_to follower.login, follower.html_url %>
-           <% friend = User.find_by(github_username: follower.login) %>
-           <%= link_to "Add Friend", "users/#{current_user.id}/friendships/#{friend.id}", method: :post %>
-        </p>
+        <p><%= link_to follower.login, follower.html_url %></p>
+        <% if follower.id != nil %>
+          <p><%= link_to "Add Friend", "users/#{current_user.id}/friendships/#{follower.id}" %></p>
+        <% end %>
       </section>
       <% end %>
     </section>
+
     <h4>Following</h4>
     <section id="following">
       <% user_info.following.each_with_index do |user, index| %>
@@ -40,6 +42,7 @@
       </section>
       <% end %>
     </section>
+
     <section>
       <h1>Bookmarked Segments</h1>
     </section>
