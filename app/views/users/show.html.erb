@@ -8,10 +8,6 @@
     <li> <%= current_user.email%> </li>
   </ul>
 
-  <section>
-    <%= button_to 'Connect to Github', github_login_path %>
-  </section>
-
   <% if current_user.github_token %>
     <h4>Github Repo's</h4>
     <section id="Github">
@@ -27,8 +23,8 @@
       <% user_info.all_followers.each_with_index do |follower, index| %>
       <section id="follower-<%= index %>">
         <p><%= link_to follower.login, follower.html_url %></p>
-        <% if follower.id != nil %>
-          <p><%= link_to "Add Friend", "users/#{current_user.id}/friendships/#{follower.id}" %></p>
+        <% if follower.id != nil && !current_user.friends.find(follower.id) %>
+          <p><%= button_to "Add Friend", "/friendships/#{follower.id}", method: :post %></p>
         <% end %>
       </section>
       <% end %>
@@ -39,7 +35,19 @@
       <% user_info.following.each_with_index do |user, index| %>
       <section id="follow-<%= index %>">
         <p><%= link_to user.login, user.html_url %></p>
+        <% if user.id != nil && !current_user.friends.find(user.id) %>
+          <p><%= button_to "Add Friend", "/friendships/#{user.id}", method: :post %></p>
+        <% end %>
       </section>
+      <% end %>
+    </section>
+
+    <h4>Friends</h4>
+    <section id="friends">
+      <% current_user.friends.each_with_index do |friend, index| %>
+        <section id="friend-<% index %>">
+          <%= link_to friend.github_username, "https://github.com/#{friend.github_username}" %>
+        </section>
       <% end %>
     </section>
 
@@ -47,4 +55,8 @@
       <h1>Bookmarked Segments</h1>
     </section>
   </section>
+
+  <% else %>
+    <%= button_to 'Connect to Github', github_login_path %>
+
 <% end %>
