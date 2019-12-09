@@ -23,7 +23,7 @@
       <% user_info.all_followers.each_with_index do |follower, index| %>
       <section id="follower-<%= index %>">
         <p><%= link_to follower.login, follower.html_url %></p>
-        <% if follower.id != nil && !current_user.friends.find(follower.id) %>
+        <% if follower.id != nil && !current_user.friends.include?(follower)%>
           <p><%= button_to "Add Friend", "/friendships/#{follower.id}", method: :post %></p>
         <% end %>
       </section>
@@ -35,7 +35,7 @@
       <% user_info.following.each_with_index do |user, index| %>
       <section id="follow-<%= index %>">
         <p><%= link_to user.login, user.html_url %></p>
-        <% if user.id != nil && !current_user.friends.find(user.id) %>
+        <% if user.id != nil && !current_user.friends.include?(user) %>
           <p><%= button_to "Add Friend", "/friendships/#{user.id}", method: :post %></p>
         <% end %>
       </section>
