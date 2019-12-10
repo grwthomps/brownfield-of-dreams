@@ -45,8 +45,6 @@ describe 'As a visitor', :js do
 
     click_on 'Create Account'
 
-    expect(current_path).to eq('/register')
-
     expect(page).to have_content("Last name can't be blank and Password can't be blank")
   end
 
