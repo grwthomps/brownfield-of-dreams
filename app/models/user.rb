@@ -5,8 +5,10 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :friends, through: :friendships
 
+  validates_presence_of :first_name, :last_name
+
   validates :email, uniqueness: true, presence: true
-  validates_presence_of :first_name
-  enum role: [:default, :admin]
   has_secure_password
+
+  enum role: [:default, :admin]
 end
