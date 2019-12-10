@@ -40,6 +40,9 @@ Rails.application.routes.draw do
   get '/video', to: 'video#show'
 
   resources :users, only: [:new, :create, :update, :edit]
+  namespace :users do
+    get '/:id/activate', to: 'activate#show'
+  end
 
   post '/friendships/:friend_id', to: 'friendships#create'
 
