@@ -14,16 +14,16 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create(user_params)
-    if user.save
-      session[:user_id] = user.id
-      flash[:success] = "Logged in as #{user.first_name}."
+    @user = User.create(user_params)
+    if @user.save
+      session[:user_id] = @user.id
+      flash[:success] = "Logged in as #{@user.first_name}."
       flash[:success] = "This account has not yet been activated. Please check your email."
+      UserMailer.with(user: @user).welcome_email.deliver_now
       redirect_to dashboard_path
     else
-      flash[:error] = user.errors.full_messages.to_sentence
-      # render :new
-      redirect_to '/register'
+      flash[:error] = @user.errors.full_messages.to_sentence
+      render :new
     end
   end
 
