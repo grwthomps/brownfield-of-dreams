@@ -51,12 +51,13 @@
       <% end %>
     </section>
 
-    <section>
-      <h1>Bookmarked Segments</h1>
-    </section>
-  </section>
-
   <% else %>
     <%= button_to 'Connect to Github', github_login_path %>
 
 <% end %>
+<h1>Bookmarked Segments</h1>
+<section id="Bookmarks">
+  <% binding.pry %>
+  <% current_user.videos.order("tutorial_id ASC, position ASC")%>
+</section>
+</section>
