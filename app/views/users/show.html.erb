@@ -57,7 +57,15 @@
 <% end %>
 <h1>Bookmarked Segments</h1>
 <section id="Bookmarks">
-  <% binding.pry %>
-  <% current_user.videos.order("tutorial_id ASC, position ASC")%>
+  <% bookmarks.order_by_position.each do |bookmark| %>
+  <section id="tutorial">
+    <p><%= bookmark.tutorial.title %></p>
+    <% bookmark.tutorial.videos.each do |video| %>
+    <ul>
+      <li><%= video.title %></li>
+    </ul>
+    <% end %>
+  </section>
+  <% end %>
 </section>
 </section>

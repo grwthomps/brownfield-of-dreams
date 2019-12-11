@@ -6,6 +6,9 @@ class UsersController < ApplicationController
       user_repos: UserInfoFacade.new(current_user),
       user_info: UserInfoFacade.new(current_user),
       }
+    else render locals: {
+      bookmarks: UserInfoFacade.new(current_user)
+    }
     end
   end
 

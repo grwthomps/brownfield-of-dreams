@@ -62,7 +62,7 @@ describe 'A registered user' do
       within(first("#tutorial")) do
         expect(page).to have_content(tutorial.title)
       end
-      within(second("#tutorial")) do
+      within "#tutorial")) do
         expect(page).to have_content(tutorial_2.title)
       end
     end
