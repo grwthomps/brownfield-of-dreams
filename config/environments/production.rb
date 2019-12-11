@@ -97,6 +97,8 @@ Rails.application.configure do
   # Sendgrid config:
   config.action_mailer.delivery_method = :smtp
 
+  config.action_mailer.default_url_options = { host: "https://shrouded-island-82497.herokuapp.com/" }
+
   config.action_mailer.smtp_settings = {
     address:              'smtp.sendgrid.net',
     port:                 '587',
