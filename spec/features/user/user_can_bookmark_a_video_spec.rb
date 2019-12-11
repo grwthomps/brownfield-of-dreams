@@ -31,4 +31,48 @@ describe 'A registered user' do
     click_on 'Bookmark'
     expect(page).to have_content("Already in your bookmarks")
   end
+
+  it "I see bookmarks organized by tutorial on User Dashboard" do
+    tutorial = create(:tutorial)
+    video = create(:video, tutorial_id: tutorial.id)
+
+    tutorial_2 = create(:tutorial)
+    video_2 = create(:video, tutorial_id: tutorial_2.id)
+    video_3 = create(:video, tutorial_id: tutorial_2.id)
+
+    user = create(:user)
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+    visit tutorial_path(tutorial)
+
+    click_on 'Bookmark'
+
+    visit tutorial_path(tutorial_2)
+
+    click_on 'Bookmark'
+
+    click_on "#{video_3.title}"
+
+    click_on 'Bookmark'
+
+    visit ('/dashboard')
+
+    within "#Bookmarks" do
+      within "#bookmark-0" do
+        expect(page).to have_content(tutorial.title)
+        expect(page).to have_content(video.title)
+      end
+
+      within "#bookmark-1" do
+        expect(page).to have_content(tutorial_2.title)
+        expect(page).to have_content(video_2.title)
+      end
+
+      within "#bookmark-2" do
+        expect(page).to have_content(tutorial_2.title)
+        expect(page).to have_content(video_3.title)
+      end
+    end
+  end
 end
