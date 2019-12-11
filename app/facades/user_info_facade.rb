@@ -32,4 +32,8 @@ class UserInfoFacade
       GithubUser.new(user[:login], user[:html_url], friend)
     end
   end
+
+  def friend_check?(user_id)
+    return true if @current_user.friends.select{|friend| friend.id == user_id}.empty?
+  end
 end
