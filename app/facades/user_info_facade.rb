@@ -14,9 +14,7 @@ class UserInfoFacade
       Repo.new(data[:name], data[:html_url])
     end
   end
-  def order_by_position
-    @current_user.videos.joins(:tutorial).group('tutorials.id, videos.id').order('tutorials.id', 'videos.position')
-  end
+
   def all_followers
     service = GithubService.new(@current_user)
     followers = service.fetch_followers
@@ -33,5 +31,9 @@ class UserInfoFacade
       friend = User.find_by(github_username: user[:login])
       GithubUser.new(user[:login], user[:html_url], friend)
     end
+  end
+
+  def bookmarks
+    @current_user.videos.joins(:tutorial).group('tutorials.id, videos.id').order('tutorials.id', 'videos.position')
   end
 end
