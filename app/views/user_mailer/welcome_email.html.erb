@@ -7,7 +7,7 @@
     <h1>Welcome to Turing Video Tutorials, <%= @user.first_name %></h1>
     <p>
       To complete your registration,
-      <a href="#{@url}">click here to activate your account</a>
+      <%= link_to "click here to activate your account", activate_url(@user.id)  %>
     </p>
     <p>Thanks for joining and have a great day!</p>
   </body>
