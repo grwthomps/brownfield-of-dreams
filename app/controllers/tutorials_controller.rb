@@ -5,7 +5,7 @@ class TutorialsController < ApplicationController
       flash[:error] = "Please log in to see this content"
       redirect_to '/'
     else
-      @facade = TutorialFacade.new(tutorial)
+      @facade = TutorialFacade.new(tutorial, params[:video_id])
     end
   end
 

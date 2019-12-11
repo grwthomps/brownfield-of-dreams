@@ -1,12 +1,9 @@
 class UsersController < ApplicationController
   def show
     @client_id = ENV['github_client_id']
-    if current_user.github_token
-      render locals: {
-      user_repos: UserInfoFacade.new(current_user),
-      user_info: UserInfoFacade.new(current_user),
-      }
-    end
+    render locals: {
+    user_info: UserInfoFacade.new(current_user)
+    }
   end
 
   def new
