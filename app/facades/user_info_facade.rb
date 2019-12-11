@@ -33,6 +33,10 @@ class UserInfoFacade
     end
   end
 
+  def friend_check?(user_id)
+    return true if @current_user.friends.select{|friend| friend.id == user_id}.empty?
+  end
+    
   def friends
     @current_user.friends
   end

@@ -1,4 +1,4 @@
-class Users::ActivateController < ApplicationController
+class ActivateController < ApplicationController
   def show
     user = User.find(params[:id])
     user.update!(status: 'active')

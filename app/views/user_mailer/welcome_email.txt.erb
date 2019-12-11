@@ -2,6 +2,7 @@ Welcome to Turing Video Tutorials, <%= @user.first_name %>
 ===============================================
 
 To complete your registration,
-please navigate to the following url: <%= @url %>
+please navigate to the following url: <%= link_to "click here to activate your account", activate_url(@user.id)  %>
+
 
 Thanks for joining and have a great day!
