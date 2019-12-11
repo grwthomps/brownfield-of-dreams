@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   get '/activate/:id', to: 'activate#show', as: 'activate'
+  get '/invite', to: "invite#new"
+  post '/invite', to: "invite#create"
+  
   get 'auth/github', as: 'github_login'
   get '/auth/:github/callback', to: "github#create"
 
