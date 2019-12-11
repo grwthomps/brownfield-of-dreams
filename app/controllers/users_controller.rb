@@ -2,8 +2,7 @@ class UsersController < ApplicationController
   def show
     @client_id = ENV['github_client_id']
     render locals: {
-    user_repos: UserInfoFacade.new(current_user),
-    user_info: UserInfoFacade.new(current_user),
+    user_info: UserInfoFacade.new(current_user)
     }
   end
 

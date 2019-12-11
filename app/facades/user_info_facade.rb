@@ -8,14 +8,14 @@ class UserInfoFacade
     service.fetch_repos
   end
 
-  def limit_five
+  def github_repos
     raw_repo_data = get_repos
     raw_repo_data[0..4].map do |data|
       Repo.new(data[:name], data[:html_url])
     end
   end
 
-  def all_followers
+  def github_followers
     service = GithubService.new(@current_user)
     followers = service.fetch_followers
     followers.map do |follower|
@@ -24,13 +24,17 @@ class UserInfoFacade
     end
   end
 
-  def following
+  def github_following
     service = GithubService.new(@current_user)
     users = service.fetch_users
     users.map do |user|
       friend = User.find_by(github_username: user[:login])
       GithubUser.new(user[:login], user[:html_url], friend)
     end
+  end
+
+  def friends
+    @current_user.friends
   end
 
   def bookmarks

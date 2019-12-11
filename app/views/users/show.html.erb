@@ -11,7 +11,7 @@
   <% if current_user.github_token %>
     <h4>Github Repo's</h4>
     <section id="Github">
-      <% user_repos.limit_five.each_with_index do |repo, index| %>
+      <% user_info.github_repos.each_with_index do |repo, index| %>
       <section id="repo-<%= index %>">
         <p><%= link_to repo.name, repo.html_url %></p>
       </section>
@@ -20,7 +20,7 @@
 
     <h4>Followers</h4>
     <section id="Followers">
-      <% user_info.all_followers.each_with_index do |follower, index| %>
+      <% user_info.github_followers.each_with_index do |follower, index| %>
       <section id="follower-<%= index %>">
         <p><%= link_to follower.login, follower.html_url %></p>
         <% if follower.id != nil && !current_user.friends.include?(follower)%>
@@ -32,7 +32,7 @@
 
     <h4>Following</h4>
     <section id="following">
-      <% user_info.following.each_with_index do |user, index| %>
+      <% user_info.github_following.each_with_index do |user, index| %>
       <section id="follow-<%= index %>">
         <p><%= link_to user.login, user.html_url %></p>
         <% if user.id != nil && !current_user.friends.include?(user) %>
@@ -44,7 +44,7 @@
 
     <h4>Friends</h4>
     <section id="friends">
-      <% current_user.friends.each_with_index do |friend, index| %>
+      <% user_info.friends.each_with_index do |friend, index| %>
         <section id="friend-<% index %>">
           <%= link_to friend.github_username, "https://github.com/#{friend.github_username}" %>
         </section>
