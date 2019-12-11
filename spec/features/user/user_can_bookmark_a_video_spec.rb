@@ -59,11 +59,19 @@ describe 'A registered user' do
     visit ('/dashboard')
 
     within "#Bookmarks" do
-      within(first("#tutorial")) do
+      within "#bookmark-0" do
         expect(page).to have_content(tutorial.title)
+        expect(page).to have_content(video.title)
       end
-      within "#tutorial")) do
+
+      within "#bookmark-1" do
         expect(page).to have_content(tutorial_2.title)
+        expect(page).to have_content(video_2.title)
+      end
+
+      within "#bookmark-2" do
+        expect(page).to have_content(tutorial_2.title)
+        expect(page).to have_content(video_3.title)
       end
     end
   end
