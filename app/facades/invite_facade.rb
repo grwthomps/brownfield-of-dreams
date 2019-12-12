@@ -6,6 +6,6 @@ class InviteFacade
 
   def github_lookup(github_handle)
     service = GithubService.new(@current_user)
-    email = service.find_github_user(github_handle)
+    service.find_github_user(github_handle)
   end
 end
