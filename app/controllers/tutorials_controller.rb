@@ -10,10 +10,10 @@ class TutorialsController < ApplicationController
   end
 
   def index
-    if current_user
-      @tutorials = Tutorial.all
-    else
-      @tutorials = Tutorial.where("classroom = false")
-    end
+    @tutorials = if current_user
+                   Tutorial.all
+                 else
+                   Tutorial.where("classroom = false")
+                 end
   end
 end

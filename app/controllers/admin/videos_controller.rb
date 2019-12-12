@@ -1,5 +1,4 @@
 class Admin::VideosController < Admin::BaseController
-
   def create
     begin
       tutorial  = Tutorial.find(params[:tutorial_id])
@@ -9,7 +8,7 @@ class Admin::VideosController < Admin::BaseController
       video.save
 
       flash[:success] = "Successfully created video."
-    rescue # Sorry about this. We should get more specific instead of swallowing all errors.
+    rescue StandardError # Sorry about this. We should get more specific instead of swallowing all errors.
       flash[:error] = "Unable to create video."
     end
 

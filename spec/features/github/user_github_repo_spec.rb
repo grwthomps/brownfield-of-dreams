@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 RSpec.describe "As a logged in user" do
   context "When I visit my dashboard" do
     it "I should see a list of 5 repo's with each Name as a link in 'Github' section" do

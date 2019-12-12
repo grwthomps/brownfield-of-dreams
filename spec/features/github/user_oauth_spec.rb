@@ -5,16 +5,17 @@ describe "As a logged in User" do
     VCR.use_cassette('user_github_oauth') do
       OmniAuth.config.mock_auth[:github] = nil
       OmniAuth.config.test_mode = true
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
-        :provider => 'github',
-        :credentials => {
-          :token => ENV["Github_access_token"]},
-        :extra => {
-          :raw_info => {
-            :login => "github_username"
-            }
+      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(
+        provider: 'github',
+        credentials: {
+          token: ENV["Github_access_token"]
+        },
+        extra: {
+          raw_info: {
+            login: "github_username"
           }
-        })
+        }
+      )
 
       user = create(:user, status: 'active')
 

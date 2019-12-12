@@ -6,6 +6,12 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
+Naming/VariableNumber:
+  Exclude:
+    - 'spec/features/user/user_can_bookmark_a_video_spec.rb'
+    - 'spec/features/vistors/no_access_classroom_tutorials_spec.rb'
+
+
 # Offense count: 2
 # Configuration parameters: Include.
 # Include: **/*.gemfile, **/Gemfile, **/gems.rb
@@ -232,7 +238,7 @@ Metrics/AbcSize:
 # Configuration parameters: CountComments, ExcludedMethods.
 # ExcludedMethods: refine
 Metrics/BlockLength:
-  Max: 62
+  Max: 69
 
 # Offense count: 1
 Metrics/CyclomaticComplexity:
@@ -250,9 +256,9 @@ Metrics/PerceivedComplexity:
 # Offense count: 1
 # Configuration parameters: EnforcedStyleForLeadingUnderscores.
 # SupportedStylesForLeadingUnderscores: disallowed, required, optional
-# Naming/MemoizedInstanceVariableName:
-  # Exclude:
-  #   - 'app/controllers/sessions_controller.rb'
+Naming/MemoizedInstanceVariableName:
+  Exclude:
+    - 'app/controllers/sessions_controller.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -277,16 +283,16 @@ Style/BracesAroundHashParameters:
 # Cop supports --auto-correct.
 # Configuration parameters: AutoCorrect, EnforcedStyle.
 # SupportedStyles: nested, compact
-# Style/ClassAndModuleChildren:
-  # Exclude:
-  #   - 'app/controllers/admin/api/v1/base_controller.rb'
-  #   - 'app/controllers/admin/api/v1/tutorial_sequencer_controller.rb'
-  #   - 'app/controllers/admin/base_controller.rb'
-  #   - 'app/controllers/admin/dashboard_controller.rb'
-  #   - 'app/controllers/admin/tutorials_controller.rb'
-  #   - 'app/controllers/admin/videos_controller.rb'
-  #   - 'app/controllers/api/v1/tutorials_controller.rb'
-  #   - 'app/controllers/api/v1/videos_controller.rb'
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'app/controllers/admin/api/v1/base_controller.rb'
+    - 'app/controllers/admin/api/v1/tutorial_sequencer_controller.rb'
+    - 'app/controllers/admin/base_controller.rb'
+    - 'app/controllers/admin/dashboard_controller.rb'
+    - 'app/controllers/admin/tutorials_controller.rb'
+    - 'app/controllers/admin/videos_controller.rb'
+    - 'app/controllers/api/v1/tutorials_controller.rb'
+    - 'app/controllers/api/v1/videos_controller.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.

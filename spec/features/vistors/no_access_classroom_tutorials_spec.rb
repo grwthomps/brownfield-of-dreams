@@ -30,5 +30,4 @@ describe "As a Visitor" do
     expect(current_path).to eq('/')
     expect(page).to have_content("Please log in to see this content")
   end
-
 end

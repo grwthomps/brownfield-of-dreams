@@ -3,13 +3,12 @@ require 'rails_helper'
 describe "As a logged in User", :vcr do
   before(:each) do
     @user = create(:user, github_username: "grwthomps", github_token: ENV["Github_access_token"])
-    friend = create(:user, github_token: ENV["friend_access_token"], github_username: "tyladevon")
+    create(:user, github_token: ENV["friend_access_token"], github_username: "tyladevon")
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
     visit '/dashboard'
   end
-
 
   context "I see a button only next to Gituhub followers who are also Brownsfield users" do
     it "I can add friend" do
