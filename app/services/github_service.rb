@@ -4,6 +4,11 @@ class GithubService
     @current_user = current_user
   end
 
+  def find_github_user(github_handle)
+    response = conn.get("users/#{github_handle}")
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
   def fetch_repos
     response = conn.get("user/repos")
     JSON.parse(response.body, symbolize_names: true)

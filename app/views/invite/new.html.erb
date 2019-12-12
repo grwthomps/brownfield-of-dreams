@@ -1,0 +1,10 @@
+<h1 align= "center">Invite Github User</h1>
+<center>
+  <%= form_tag "/invite", method: :post do %>
+
+    <%= label_tag :github_handle %>
+    <%= text_field_tag :github_handle %>
+
+    <%= submit_tag 'Send Invite' %>
+  <% end %>
+</center>

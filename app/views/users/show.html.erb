@@ -9,7 +9,10 @@
     <li> <%= current_user.status%> </li>
   </ul>
 
+
   <% if current_user.github_token %>
+    <p><%= link_to "Invite a Github friend! ", '/invite' %></p>
+    
     <h4>Github Repo's</h4>
     <section id="Github">
       <% user_info.github_repos.each_with_index do |repo, index| %>
@@ -55,6 +58,7 @@
   <% else %>
     <%= button_to 'Connect to Github', github_login_path %>
   <% end %>
+
 
   <h1>Bookmarked Segments</h1>
   <section id="Bookmarks">
