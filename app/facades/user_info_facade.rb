@@ -3,13 +3,13 @@ class UserInfoFacade
     @current_user = current_user
   end
 
-  def get_repos
+  def gather_repos
     service = GithubService.new(@current_user)
     service.fetch_repos
   end
 
   def github_repos
-    raw_repo_data = get_repos
+    raw_repo_data = gather_repos
     raw_repo_data[0..4].map do |data|
       Repo.new(data[:name], data[:html_url])
     end
@@ -34,14 +34,22 @@ class UserInfoFacade
   end
 
   def friend_check?(user_id)
-    return true if @current_user.friends.select{|friend| friend.id == user_id}.empty?
+    return true if @current_user.friends.select { |friend| friend.id == user_id }.empty?
   end
-    
+
   def friends
     @current_user.friends
   end
 
   def bookmarks
-    @current_user.videos.joins(:tutorial).group('tutorials.id, videos.id').order('tutorials.id', 'videos.position')
+    bookmark_videos = @current_user.videos.joins(:tutorial).group('tutorials.id, videos.id').order('tutorials.id', 'videos.position')
+    bookmarks_hash = {}
+
+    bookmark_videos.each do |video|
+      bookmarks_hash[video.tutorial] ||= []
+      bookmarks_hash[video.tutorial] << video
+    end
+
+    bookmarks_hash
   end
 end

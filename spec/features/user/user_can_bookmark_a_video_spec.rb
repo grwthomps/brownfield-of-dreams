@@ -52,25 +52,19 @@ describe 'A registered user' do
 
     click_on 'Bookmark'
 
-    click_on "#{video_3.title}"
+    click_on video_3.title.to_s
 
     click_on 'Bookmark'
 
-    visit ('/dashboard')
+    visit '/dashboard'
 
     within "#Bookmarks" do
-      within "#bookmark-0" do
-        expect(page).to have_content(tutorial.title)
+      within "#tutorial-#{tutorial.id}" do
         expect(page).to have_content(video.title)
       end
 
-      within "#bookmark-1" do
-        expect(page).to have_content(tutorial_2.title)
+      within "#tutorial-#{tutorial_2.id}" do
         expect(page).to have_content(video_2.title)
-      end
-
-      within "#bookmark-2" do
-        expect(page).to have_content(tutorial_2.title)
         expect(page).to have_content(video_3.title)
       end
     end
