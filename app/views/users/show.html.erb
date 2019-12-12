@@ -4,15 +4,15 @@
   <%= button_to 'Log Out', logout_path, method: 'delete', class: "btn btn-primary mb1 bg-teal" %>
   <h3>Account Details</h3>
   <ul>
-    <li> <%= current_user.first_name  %> <%= current_user.last_name %> </li>
-    <li> <%= current_user.email%> </li>
-    <li> <%= current_user.status%> </li>
+    <li> <%= user_name  %> </li>
+    <li> <%= user_email %> </li>
+    <li> <%= user_status %> </li>
   </ul>
 
 
-  <% if current_user.github_token %>
+  <% if user_token %>
     <p><%= link_to "Invite a Github friend! ", '/invite' %></p>
-    
+
     <h4>Github Repo's</h4>
     <section id="Github">
       <% user_info.github_repos.each_with_index do |repo, index| %>
@@ -55,7 +55,7 @@
       <% end %>
     </section>
 
-  <% else %>
+  <% elsif user_status == 'active' %>
     <%= button_to 'Connect to Github', github_login_path %>
   <% end %>
 
