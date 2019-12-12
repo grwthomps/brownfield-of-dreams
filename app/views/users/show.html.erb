@@ -9,9 +9,10 @@
     <li> <%= current_user.status%> </li>
   </ul>
 
-  <p><%= link_to "Invite a Github friend! ", '/invite' %></p>
 
   <% if current_user.github_token %>
+    <p><%= link_to "Invite a Github friend! ", '/invite' %></p>
+    
     <h4>Github Repo's</h4>
     <section id="Github">
       <% user_info.github_repos.each_with_index do |repo, index| %>
@@ -26,7 +27,7 @@
       <% user_info.github_followers.each_with_index do |follower, index| %>
       <section id="follower-<%= index %>">
         <p><%= link_to follower.login, follower.html_url %></p>
-        <% if follower.id != nil && user_info.friend_check?(user.id) %>
+        <% if follower.id != nil && user_info.friend_check?(follower.id) %>
           <p><%= button_to "Add Friend", "/friendships/#{follower.id}", method: :post %></p>
         <% end %>
       </section>
