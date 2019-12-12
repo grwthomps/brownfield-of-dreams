@@ -1,6 +1,5 @@
 class InviteController < ApplicationController
-  def new
-  end
+  def new; end
 
   def create
     invite = InviteFacade.new(current_user)
