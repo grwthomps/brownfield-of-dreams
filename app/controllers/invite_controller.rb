@@ -3,14 +3,14 @@ class InviteController < ApplicationController
   end
 
   def create
-    github_email = InviteFacade.new(current_user)
-    if github_email.github_lookup(params[:github_handle]) == nil
+    invite = InviteFacade.new(current_user)
+    user = invite.github_lookup(params[:github_handle])
+    if user[:email] == nil
       flash[:error] = "The Github user you selected doesn't have an email address associated with their account."
-      redirect_to '/dashboard'
     else
-    UserMailer.with(user: @user).welcome_email.deliver_now
-
+      UserMailer.invite_email(user, current_user).deliver_now
+      flash[:success] = "Successfully sent invite!"
+    end
     redirect_to '/dashboard'
-    flash[:success] = "Successfully sent invite!"
   end
 end
