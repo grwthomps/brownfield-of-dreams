@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'As a logged in user', :vcr do
 
   it 'I see a link to invite a Github user on my dashboard' do
-    user = create(:user)
+    user = create(:user, github_token: ENV['Github_access_token'])
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
@@ -13,7 +13,7 @@ describe 'As a logged in user', :vcr do
 
     expect(current_path).to eq('/invite')
 
-    fill_in "Github handle", with: "tyladevon"
+    fill_in "Github handle", with: "not-zorro"
 
     click_on "Send Invite"
 
@@ -23,7 +23,7 @@ describe 'As a logged in user', :vcr do
   end
 
   it "cannot send an invite to a non-Github user" do
-    user = create(:user)
+    user = create(:user, github_token: ENV['Github_access_token'])
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
