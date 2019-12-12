@@ -2,14 +2,13 @@ require 'rails_helper'
 
 describe "As a logged in User", :vcr do
   before(:each) do
-    user = create(:user, github_username: "grwthomps", github_token: ENV["Github_access_token"])
-    friend = create(:user, github_token: ENV["friend_access_token"], github_username: "tyladevon")
+    @user = create(:user, github_username: "grwthomps", github_token: ENV["Github_access_token"])
+    create(:user, github_token: ENV["friend_access_token"], github_username: "tyladevon")
 
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
     visit '/dashboard'
   end
-
 
   context "I see a button only next to Gituhub followers who are also Brownsfield users" do
     it "I can add friend" do
@@ -24,6 +23,8 @@ describe "As a logged in User", :vcr do
       end
 
       expect(current_path).to eq(dashboard_path)
+      @user.reload
+      visit dashboard_path
 
       within "#follower-0" do
         expect(page).to_not have_button "Add Friend"

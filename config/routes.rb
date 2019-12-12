@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get '/activate/:id', to: 'activate#show', as: 'activate'
 
   get '/invite', to: "invite#new"

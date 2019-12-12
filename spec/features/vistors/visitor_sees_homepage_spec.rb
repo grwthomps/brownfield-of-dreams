@@ -11,6 +11,8 @@ describe 'Visitor' do
       video3 = create(:video, tutorial_id: tutorial2.id)
       video4 = create(:video, tutorial_id: tutorial2.id)
 
+      visit '/get_started'
+      visit '/about'
       visit root_path
 
       expect(page).to have_css('.tutorial', count: 2)

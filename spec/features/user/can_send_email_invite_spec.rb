@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'As a logged in user', :vcr do
-
   it 'I see a link to invite a Github user on my dashboard' do
     user = create(:user, github_token: ENV['Github_access_token'])
 
