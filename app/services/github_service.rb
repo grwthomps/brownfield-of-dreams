@@ -5,7 +5,7 @@ class GithubService
   end
 
   def find_github_user(github_handle)
-    response = Faraday.get "https://api.github.com/users/#{github_handle}"
+    response = conn.get("users/#{github_handle}")
     JSON.parse(response.body, symbolize_names: true)
   end
 
